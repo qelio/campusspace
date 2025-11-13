@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4"><i class="fas fa-home"></i> Главная страница</h1>
+        
+        {% if stats %}
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ stats.total_buildings }}</h5>
+                        <p class="card-text">Корпусов</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ stats.total_rooms }}</h5>
+                        <p class="card-text">Помещений</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ "%.2f"|format(stats.total_area|float) }}</h5>
+                        <p class="card-text">Общая площадь (м²)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ "%.2f"|format(stats.total_volume|float) }}</h5>
+                        <p class="card-text">Общий объем (м³)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Быстрый доступ</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('rooms_list') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-door-open"></i> Список всех помещений
+                            </a>
+                            <a href="{{ url_for('buildings_management') }}" class="btn btn-outline-success">
+                                <i class="fas fa-building"></i> Управление корпусами
+                            </a>
+                            <a href="{{ url_for('rooms_management') }}" class="btn btn-outline-info">
+                                <i class="fas fa-edit"></i> Управление помещениями
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Корпуса университета</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if buildings %}
+                            <div class="list-group">
+                                {% for building in buildings %}
+                                    <a href="{{ url_for('building_structure', building_id=building.id) }}" 
+                                       class="list-group-item list-group-item-action">
+                                        <i class="fas fa-building"></i> {{ building.name }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">Корпуса не добавлены</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

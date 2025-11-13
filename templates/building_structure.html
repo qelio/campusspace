@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Структура корпуса {{ building.name }} - Учет аудиторного фонда{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-sitemap"></i> Структура корпуса: {{ building.name }}</h1>
+            <a href="{{ url_for('buildings_management') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Назад к корпусам
+            </a>
+        </div>
+        
+        {% if faculty_structure %}
+            {% for faculty_data in faculty_structure %}
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-graduation-cap"></i> {{ faculty_data.faculty.name }}
+                        <span class="badge bg-light text-dark ms-2">
+                            {{ faculty_data.faculty.room_count }} помещений
+                        </span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Уровень</th>
+                                    <th>Название</th>
+                                    <th>Тип</th>
+                                    <th>Количество помещений</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for dept in faculty_data.structure %}
+                                <tr>
+                                    <td>
+                                        {% for i in range(dept.level) %}
+                                            <i class="fas fa-arrow-right text-muted"></i>
+                                        {% endfor %}
+                                        Уровень {{ dept.level }}
+                                    </td>
+                                    <td>{{ dept.name }}</td>
+                                    <td>
+                                        {% if dept.type == 'faculty' %}
+                                            <span class="badge bg-primary">Факультет</span>
+                                        {% elif dept.type == 'department' %}
+                                            <span class="badge bg-success">Кафедра</span>
+                                        {% elif dept.type == 'laboratory' %}
+                                            <span class="badge bg-info">Лаборатория</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary">{{ dept.room_count }}</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> В этом корпусе нет подразделений.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

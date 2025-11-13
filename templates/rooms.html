@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Все помещения - Учет аудиторного фонда{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4"><i class="fas fa-door-open"></i> Все помещения</h1>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Список помещений с расчетами площадей и объемов</h5>
+            </div>
+            <div class="card-body">
+                {% if rooms %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Корпус</th>
+                                <th>Номер</th>
+                                <th>Расположение</th>
+                                <th>Размеры (м)</th>
+                                <th>Высота (м)</th>
+                                <th>Площадь (м²)</th>
+                                <th>Объем (м³)</th>
+                                <th>Назначение</th>
+                                <th>Тип</th>
+                                <th>Подразделение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for room in rooms %}
+                            <tr>
+                                <td>{{ room.building_name }}</td>
+                                <td>{{ room.room_number }}</td>
+                                <td>{{ room.location_description or '-' }}</td>
+                                <td>{{ room.width }} × {{ room.length }}</td>
+                                <td>{{ room.ceiling_height }}</td>
+                                <td><strong>{{ "%.2f"|format(room.area|float) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room.volume|float) }}</strong></td>
+                                <td>{{ room.purpose or '-' }}</td>
+                                <td>
+                                    {% if room.room_type == 'lecture' %}
+                                        <span class="badge bg-primary">Лекционная</span>
+                                    {% elif room.room_type == 'laboratory' %}
+                                        <span class="badge bg-success">Лаборатория</span>
+                                    {% elif room.room_type == 'office' %}
+                                        <span class="badge bg-info">Офис</span>
+                                    {% elif room.room_type == 'storage' %}
+                                        <span class="badge bg-warning">Склад</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Другое</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ room.department_name or '-' }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted">Помещения не найдены</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

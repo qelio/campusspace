@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование корпуса - Учет аудиторного фонда{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-edit"></i> Редактирование корпуса</h1>
+            <a href="{{ url_for('buildings_management') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Назад
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Редактирование информации о корпусе</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Название корпуса *</label>
+                        <input type="text" class="form-control" id="name" name="name" 
+                               value="{{ building.name }}" required maxlength="100">
+                        <div class="form-text">Введите уникальное название корпуса</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Обновить корпус
+                        </button>
+                        <a href="{{ url_for('buildings_management') }}" class="btn btn-outline-secondary">
+                            Отмена
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

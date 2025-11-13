@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление помещения - Учет аудиторного фонда{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-plus"></i> Добавление помещения</h1>
+            <a href="{{ url_for('rooms_management') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Назад
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Информация о помещении</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="building_id" class="form-label">Корпус *</label>
+                                <select class="form-select" id="building_id" name="building_id" required>
+                                    <option value="">Выберите корпус</option>
+                                    {% for building in buildings %}
+                                    <option value="{{ building.id }}">{{ building.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="room_number" class="form-label">Номер комнаты *</label>
+                                <input type="text" class="form-control" id="room_number" name="room_number" 
+                                       required maxlength="20" placeholder="Например: 101">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location_description" class="form-label">Расположение в корпусе</label>
+                        <textarea class="form-control" id="location_description" name="location_description" 
+                                  rows="2" placeholder="Например: Первый этаж, левое крыло"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="width" class="form-label">Ширина (м) *</label>
+                                <input type="number" class="form-control" id="width" name="width" 
+                                       step="0.01" min="0.1" required placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="length" class="form-label">Длина (м) *</label>
+                                <input type="number" class="form-control" id="length" name="length" 
+                                       step="0.01" min="0.1" required placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="ceiling_height" class="form-label">Высота потолков (м) *</label>
+                                <input type="number" class="form-control" id="ceiling_height" name="ceiling_height" 
+                                       step="0.01" min="1.0" value="3.0" required placeholder="3.00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="purpose" class="form-label">Назначение</label>
+                                <input type="text" class="form-control" id="purpose" name="purpose" 
+                                       maxlength="255" placeholder="Например: Лекционная аудитория">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="room_type" class="form-label">Тип помещения *</label>
+                                <select class="form-select" id="room_type" name="room_type" required>
+                                    <option value="">Выберите тип</option>
+                                    <option value="lecture">Лекционная</option>
+                                    <option value="laboratory">Лаборатория</option>
+                                    <option value="office">Офис</option>
+                                    <option value="storage">Склад</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="department_id" class="form-label">Подразделение</label>
+                        <select class="form-select" id="department_id" name="department_id">
+                            <option value="">Не назначено</option>
+                            {% for department in departments %}
+                            <option value="{{ department.id }}">{{ department.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Сохранить помещение
+                        </button>
+                        <a href="{{ url_for('rooms_management') }}" class="btn btn-outline-secondary">
+                            Отмена
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
