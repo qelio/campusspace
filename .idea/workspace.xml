@@ -4,25 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1fccda8f-fe9c-4265-9de5-f8ffce859f8e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/classroom-fund.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/add_building.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/add_room.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/building_structure.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/buildings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/edit_building.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/edit_room.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/rooms.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/rooms_management.html" afterDir="false" />
+    <list default="true" id="1fccda8f-fe9c-4265-9de5-f8ffce859f8e" name="Changes" comment="first_commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +57,19 @@
       <option name="presentableId" value="Default" />
       <updated>1763069085648</updated>
     </task>
+    <task id="LOCAL-00001" summary="first_commit">
+      <option name="closed" value="true" />
+      <created>1763070698247</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763070698247</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first_commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first_commit" />
   </component>
 </project>
