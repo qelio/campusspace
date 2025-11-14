@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # MySQL база данных
+  mysql:
+    image: mysql:8.0
+    container_name: campusspace-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: university_rooms
+      MYSQL_USER: campususer
+      MYSQL_PASSWORD: campuspass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./info/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
+      - ./mysql_logs:/var/log/mysql
+    networks:
+      - campusspace-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Flask приложение
+  web:
+    build: .
+    container_name: campusspace-web
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_USER=campususer
+      - DATABASE_PASSWORD=campuspass
+      - DATABASE_NAME=university_rooms
+    volumes:
+      - ./app_logs:/app/logs
+      - ./uploads:/app/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - campusspace-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  campusspace-network:
+    driver: bridge

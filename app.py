@@ -17,7 +17,7 @@ def get_db_connection():
         db_host = os.environ.get('DATABASE_HOST', 'localhost')
         db_user = os.environ.get('DATABASE_USER', 'root')
         db_password = os.environ.get('DATABASE_PASSWORD', 'slava2012')
-        db_name = os.environ.get('DATABASE_NAME', 'classroom-fund')
+        db_name = os.environ.get('DATABASE_NAME', 'university_rooms')
 
         connection = mysql.connector.connect(
             host=db_host,
@@ -556,4 +556,4 @@ def delete_room(room_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
