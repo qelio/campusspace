@@ -3,8 +3,15 @@
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <h1 class="mb-4"><i class="fas fa-home"></i> Главная страница</h1>
-        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-home"></i> Главная страница</h1>
+            {% if current_user %}
+            <span class="badge bg-success">
+                <i class="fas fa-user"></i> {{ current_user.full_name }}
+            </span>
+            {% endif %}
+        </div>
+
         {% if stats %}
         <div class="row mb-4">
             <div class="col-md-3">
@@ -59,11 +66,20 @@
                             <a href="{{ url_for('rooms_management') }}" class="btn btn-outline-info">
                                 <i class="fas fa-edit"></i> Управление помещениями
                             </a>
+                            {% if not current_user %}
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-warning">
+                                <i class="fas fa-sign-in-alt"></i> Войти в систему
+                            </a>
+                            {% else %}
+                            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-sign-out-alt"></i> Выйти
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
@@ -73,7 +89,7 @@
                         {% if buildings %}
                             <div class="list-group">
                                 {% for building in buildings %}
-                                    <a href="{{ url_for('building_structure', building_id=building.id) }}" 
+                                    <a href="{{ url_for('building_structure', building_id=building.id) }}"
                                        class="list-group-item list-group-item-action">
                                         <i class="fas fa-building"></i> {{ building.name }}
                                     </a>
@@ -84,6 +100,36 @@
                         {% endif %}
                     </div>
                 </div>
+
+                {% if current_user %}
+                <div class="card mt-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-user-shield"></i> Права доступа
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-1"><i class="fas fa-check text-success"></i> Просмотр всех данных</p>
+                        <p class="mb-1"><i class="fas fa-check text-success"></i> Добавление помещений</p>
+                        <p class="mb-1"><i class="fas fa-check text-success"></i> Редактирование данных</p>
+                        <p class="mb-0"><i class="fas fa-check text-success"></i> Удаление записей</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="card mt-4">
+                    <div class="card-header bg-warning">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-info-circle"></i> Информация
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2">Вы вошли как <strong>гостевой пользователь</strong>.</p>
+                        <p class="mb-0">Для управления данными необходимо
+                            <a href="{{ url_for('login') }}">авторизоваться</a>.
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

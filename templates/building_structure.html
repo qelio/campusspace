@@ -7,11 +7,18 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1><i class="fas fa-sitemap"></i> Структура корпуса: {{ building.name }}</h1>
-            <a href="{{ url_for('buildings_management') }}" class="btn btn-outline-secondary">
-                <i class="fas fa-arrow-left"></i> Назад к корпусам
-            </a>
+            <div>
+                <a href="{{ url_for('buildings_management') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Назад к корпусам
+                </a>
+                {% if current_user %}
+                <a href="{{ url_for('edit_building', building_id=building.id) }}" class="btn btn-outline-primary">
+                    <i class="fas fa-edit"></i> Редактировать
+                </a>
+                {% endif %}
+            </div>
         </div>
-        
+
         {% if faculty_structure %}
             {% for faculty_data in faculty_structure %}
             <div class="card mb-4">
@@ -67,6 +74,9 @@
         {% else %}
             <div class="alert alert-info">
                 <i class="fas fa-info-circle"></i> В этом корпусе нет подразделений.
+                {% if current_user %}
+                Вы можете <a href="{{ url_for('rooms_management') }}" class="alert-link">добавить помещения</a> и назначить им подразделения.
+                {% endif %}
             </div>
         {% endif %}
     </div>

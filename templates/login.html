@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Вход в систему - CampusSpace{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card mt-5">
+            <div class="card-header text-center">
+                <h4><i class="fas fa-sign-in-alt"></i> Вход в систему</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" 
+                               required placeholder="user@university.ru">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" id="password" name="password" 
+                               required placeholder="Введите пароль">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Войти
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-4">
+                    <h6>Тестовые пользователи:</h6>
+                    <div class="small text-muted">
+                        <div><strong>admin@university.ru</strong> - полный доступ</div>
+                        <div><strong>manager@university.ru</strong> - управление данными</div>
+                        <div><strong>viewer@university.ru</strong> - только просмотр</div>
+                        <div class="mt-1">Пароль: <code>password123</code> для всех</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,26 +1,113 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 import mysql.connector
 from mysql.connector import Error
 import os
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
 
+# Конфигурация
+app.config['SESSION_PERMANENT'] = False
+
 
 def get_db_connection():
     try:
+        # Используем переменные окружения для подключения к БД
+        db_host = os.environ.get('DATABASE_HOST', 'localhost')
+        db_user = os.environ.get('DATABASE_USER', 'root')
+        db_password = os.environ.get('DATABASE_PASSWORD', 'slava2012')
+        db_name = os.environ.get('DATABASE_NAME', 'classroom-fund')
+
         connection = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='slava2012',
-            database='classroom-fund',
+            host=db_host,
+            user=db_user,
+            password=db_password,
+            database=db_name,
         )
         return connection
     except Error as e:
         print(f"Ошибка подключения к БД: {e}")
+        print(f"Параметры подключения: host={db_host}, user={db_user}, database={db_name}")
         return None
 
 
+def login_required(f):
+    def decorated_function(*args, **kwargs):
+        if not session.get('user_id'):
+            flash('Для выполнения этого действия необходимо авторизоваться', 'error')
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+
+    decorated_function.__name__ = f.__name__
+    return decorated_function
+
+
+def get_current_user():
+    if 'user_id' in session:
+        conn = get_db_connection()
+        if conn:
+            try:
+                cursor = conn.cursor(dictionary=True)
+                cursor.execute("SELECT id, email, full_name FROM users WHERE id = %s", (session['user_id'],))
+                user = cursor.fetchone()
+                return user
+            except Error as e:
+                print(f"Ошибка получения пользователя: {e}")
+            finally:
+                cursor.close()
+                conn.close()
+    return None
+
+
+@app.context_processor
+def inject_user():
+    return dict(current_user=get_current_user())
+
+
+# Маршруты аутентификации
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        conn = get_db_connection()
+        if conn is None:
+            flash('Ошибка подключения к базе данных', 'error')
+            return render_template('login.html')
+
+        try:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM users WHERE email = %s AND is_active = TRUE", (email,))
+            user = cursor.fetchone()
+
+            if user and check_password_hash(user['password_hash'], password):
+                session['user_id'] = user['id']
+                session['user_email'] = user['email']
+                session['user_name'] = user['full_name']
+                flash(f'Добро пожаловать, {user["full_name"]}!', 'success')
+                return redirect(url_for('index'))
+            else:
+                flash('Неверный email или пароль', 'error')
+
+        except Error as e:
+            flash(f'Ошибка авторизации: {e}', 'error')
+        finally:
+            cursor.close()
+            conn.close()
+
+    return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Вы успешно вышли из системы', 'success')
+    return redirect(url_for('index'))
+
+
+# Обновленные маршруты с проверкой авторизации
 @app.route('/')
 def index():
     conn = get_db_connection()
@@ -152,6 +239,7 @@ def building_structure(building_id):
                            faculty_structure=faculty_structure)
 
 
+# Маршруты управления с проверкой авторизации
 @app.route('/buildings')
 def buildings_management():
     conn = get_db_connection()
@@ -175,6 +263,7 @@ def buildings_management():
 
 
 @app.route('/building/add', methods=['GET', 'POST'])
+@login_required
 def add_building():
     if request.method == 'POST':
         name = request.form['name']
@@ -203,6 +292,7 @@ def add_building():
 
 
 @app.route('/building/edit/<int:building_id>', methods=['GET', 'POST'])
+@login_required
 def edit_building(building_id):
     conn = get_db_connection()
     if conn is None:
@@ -247,6 +337,7 @@ def edit_building(building_id):
 
 
 @app.route('/building/delete/<int:building_id>')
+@login_required
 def delete_building(building_id):
     conn = get_db_connection()
     if conn is None:
@@ -308,6 +399,7 @@ def rooms_management():
 
 
 @app.route('/room/add', methods=['GET', 'POST'])
+@login_required
 def add_room():
     conn = get_db_connection()
     if conn is None:
@@ -369,6 +461,7 @@ def add_room():
 
 
 @app.route('/room/edit/<int:room_id>', methods=['GET', 'POST'])
+@login_required
 def edit_room(room_id):
     conn = get_db_connection()
     if conn is None:
@@ -439,6 +532,7 @@ def edit_room(room_id):
 
 
 @app.route('/room/delete/<int:room_id>')
+@login_required
 def delete_room(room_id):
     conn = get_db_connection()
     if conn is None:
