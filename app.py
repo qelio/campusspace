@@ -68,6 +68,21 @@ def inject_user():
 # Маршруты аутентификации
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    try:
+        # Используем переменные окружения для подключения к БД
+        db_host = os.environ.get('DATABASE_HOST', 'localhost')
+        db_user = os.environ.get('DATABASE_USER', 'root')
+        db_password = os.environ.get('DATABASE_PASSWORD', 'slava2012')
+        db_name = os.environ.get('DATABASE_NAME', 'university_rooms')
+
+        connection = mysql.connector.connect(
+            host=db_host,
+            user=db_user,
+            password=db_password,
+            database=db_name,
+        )
+    except Error as e:
+        flash(e, 'error')
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -99,6 +114,18 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/health')
+def health_check():
+    """Health check endpoint for deployment verification"""
+    try:
+        conn = get_db_connection()
+        if conn:
+            conn.close()
+            return jsonify({"status": "healthy", "database": "connected"}), 200
+        else:
+            return jsonify({"status": "unhealthy", "database": "disconnected"}), 503
+    except Exception as e:
+        return jsonify({"status": "unhealthy", "error": str(e)}), 503
 
 @app.route('/logout')
 def logout():
