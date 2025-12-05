@@ -1,0 +1,13 @@
+[MASTER]
+fail-on=error
+disable=all
+enable=missing-docstring,
+       trailing-whitespace,
+       bad-indentation,
+       undefined-variable,
+       unused-import,
+       unused-variable,
+       undefined-loop-variable,
+       used-before-assignment,
+       anomalous-backslash-in-string,
+       dangerous-default-value

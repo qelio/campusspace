@@ -1,2 +1,5 @@
 flask
 mysql-connector-python
+pylint==3.0.3
+bandit==1.7.5
+detect-secrets==1.4.0

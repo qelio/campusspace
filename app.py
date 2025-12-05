@@ -17,7 +17,7 @@ def get_db_connection():
         db_host = os.environ.get('DATABASE_HOST', 'localhost')
         db_user = os.environ.get('DATABASE_USER', 'root')
         db_password = os.environ.get('DATABASE_PASSWORD', 'slava2012')
-        db_name = os.environ.get('DATABASE_NAME', 'university_rooms')
+        db_name = os.environ.get('DATABASE_NAME', 'university_rooms1')
 
         connection = mysql.connector.connect(
             host=db_host,
