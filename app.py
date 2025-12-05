@@ -27,7 +27,7 @@ def get_db_connection():
         )
         return connection
     except Error as e:
-        print(f"Ошибка подключения к БД: {e}")
+        print(f"Ошибка подключения к database: {e}")
         print(f"Параметры подключения: host={db_host}, user={db_user}, database={db_name}")
         return None
 
