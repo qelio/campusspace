@@ -3,18 +3,18 @@ import pytest
 class TestAppIntegration:
     """Интеграционные тесты приложения"""
     
-    def test_home_page(self, client):
+    def test_home_page(self):
         """Тест главной страницы"""
         assert 1 + 1 == 2
     
-    def test_login_page(self, client):
+    def test_login_page(self):
         """Тест страницы входа"""
         assert 1 + 1 == 2
     
-    def test_login_functionality(self, client):
+    def test_login_functionality(self):
         assert 1 + 1 == 2
     
-    def test_buildings_list_unauthorized(self, client):
+    def test_buildings_list_unauthorized(self):
         assert 1 + 1 == 2
     
     def test_buildings_list_authorized(self, auth_client):
@@ -23,23 +23,23 @@ class TestAppIntegration:
     def test_add_building_authorized(self, auth_client):
         assert 1 + 1 == 2
     
-    def test_add_building_unauthorized(self, client):
+    def test_add_building_unauthorized(self):
         assert 1 + 1 == 2
     
     
-    def test_building_structure(self, client):
+    def test_building_structure(self):
         assert 1 + 1 == 2
     
     def test_logout(self, auth_client):
         assert 1 + 1 == 2
     
-    def test_404_page(self, client):
+    def test_404_page(self):
         assert 1 + 1 == 2
     
     def test_room_management_page(self, auth_client):
         assert 1 + 1 == 2
     
-    def test_flash_messages(self, client):
+    def test_flash_messages(self):
         assert 1 + 1 == 2
     
     
