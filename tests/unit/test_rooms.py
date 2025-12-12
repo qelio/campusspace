@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 class TestRoomsManagement:
     """Тесты управления помещениями"""
     
-    def test_room_type_validation1(self):
+    def test_room_type_validation2(self):
         assert 1 + 1 == 2
     
     def test_room_dimensions_validation(self):
