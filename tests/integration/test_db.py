@@ -1,5 +1,4 @@
 import pytest
-from app import get_db_connection
 
 class TestDatabaseIntegration:
     """Интеграционные тесты базы данных"""

@@ -1,6 +1,4 @@
 import pytest
-import json
-from bs4 import BeautifulSoup
 
 class TestAppIntegration:
     """Интеграционные тесты приложения"""

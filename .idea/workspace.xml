@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1fccda8f-fe9c-4265-9de5-f8ffce859f8e" name="Changes" comment="code checks">
+    <list default="true" id="1fccda8f-fe9c-4265-9de5-f8ffce859f8e" name="Changes" comment="add tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_users.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_secret.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/test_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/integration/test_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/integration/test_db.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +118,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764899949088</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add tests">
+      <option name="closed" value="true" />
+      <created>1765506984078</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1765506984078</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add tests">
+      <option name="closed" value="true" />
+      <created>1765507044469</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1765507044469</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -129,6 +144,7 @@
     <MESSAGE value="add authorization" />
     <MESSAGE value="add Dockerfile and docker-compose.yaml" />
     <MESSAGE value="code checks" />
-    <option name="LAST_COMMIT_MESSAGE" value="code checks" />
+    <MESSAGE value="add tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="add tests" />
   </component>
 </project>
