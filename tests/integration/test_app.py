@@ -31,7 +31,7 @@ class TestAppIntegration:
         assert 1 + 1 == 2
     
     def test_logout(self):
-        assert 1 + 1 == 2
+        assert 1 + 1 == 3
     
     def test_404_page(self):
         assert 1 + 1 == 2
