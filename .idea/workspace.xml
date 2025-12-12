@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1fccda8f-fe9c-4265-9de5-f8ffce859f8e" name="Changes" comment="add Dockerfile and docker-compose.yaml">
-      <change afterPath="$PROJECT_DIR$/.bandit.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.pylintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_secret.py" afterDir="false" />
+    <list default="true" id="1fccda8f-fe9c-4265-9de5-f8ffce859f8e" name="Changes" comment="code checks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_users.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_secret.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763114413210</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="code checks">
+      <option name="closed" value="true" />
+      <created>1764899949088</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764899949088</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -122,6 +128,7 @@
     <MESSAGE value="add info" />
     <MESSAGE value="add authorization" />
     <MESSAGE value="add Dockerfile and docker-compose.yaml" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Dockerfile and docker-compose.yaml" />
+    <MESSAGE value="code checks" />
+    <option name="LAST_COMMIT_MESSAGE" value="code checks" />
   </component>
 </project>
